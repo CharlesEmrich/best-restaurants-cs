@@ -188,6 +188,44 @@ namespace BestRestaurants.Objects
         conn.Close();
       }
     }
+    public void Update(string columnName, int newInt)
+    {
+      // SqlConnection conn = DB.Connection();
+      // conn.Open();
+      //
+      // SqlCommand cmd = new SqlCommand("", conn);
+      // if (columnName == "happy_hour") {
+      //   cmd = new SqlCommand("UPDATE restaurants SET happy_hour = @NewInt OUTPUT INSERTED.happy_hour WHERE id = @RestaurantId;", conn);
+      // }
+      // 
+      // SqlParameter newNameParameter = new SqlParameter();
+      // newNameParameter.ParameterName = "@NewInt";
+      // newNameParameter.Value = newInt;
+      // cmd.Parameters.Add(newNameParameter);
+      //
+      // SqlParameter restaurantIdParameter = new SqlParameter();
+      // restaurantIdParameter.ParameterName = "@RestaurantId";
+      // restaurantIdParameter.Value = this.GetId();
+      // cmd.Parameters.Add(restaurantIdParameter);
+      // SqlDataReader rdr = cmd.ExecuteReader();
+      //
+      // while(rdr.Read())
+      // {
+      //   if (columnName == "happy_hour") {
+      //     this._happyHour = rdr.GetBoolean(0);
+      //   }
+      // }
+      //
+      // if (rdr != null)
+      // {
+      //   rdr.Close();
+      // }
+      //
+      // if (conn != null)
+      // {
+      //   conn.Close();
+      // }
+    }
     public static Restaurant Find(int searchId)
     {
       SqlConnection conn = DB.Connection();
