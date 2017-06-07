@@ -6,7 +6,7 @@ namespace BestRestaurants.Objects
 {
   public class Cuisine
   {
-    private int _id;
+    private int    _id;
     private string _name;
 
     public Cuisine(string name, int id = 0)
