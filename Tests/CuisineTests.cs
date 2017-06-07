@@ -63,14 +63,15 @@ namespace BestRestaurants
     [Fact]
     public void Delete_RemovesCuisineFromDatabase()
     {
-      //TODO: Add a second saved Cuisine to make sure that we're not deleting the whole db.
       //Arrange
-      Cuisine testCase = new Cuisine("Nouvelle French");
-      testCase.Save();
+      Cuisine testCase1 = new Cuisine("Nouvelle French");
+      testCase1.Save();
+      Cuisine testCase2 = new Cuisine("Germanic Modern");
+      testCase2.Save();
       //Act
-      Cuisine.Delete(testCase.GetId());
+      Cuisine.Delete(testCase1.GetId());
       int actual = Cuisine.GetAll().Count;
-      int expected = 0;
+      int expected = 1;
       //Assert
       Assert.Equal(expected, actual);
     }

@@ -64,32 +64,48 @@ namespace BestRestaurants.Objects
       return _happyHour;
     }
 
-    // public void Save()
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (name) OUTPUT INSERTED.id VALUES(@RestaurantName);", conn);
-    //
-    //   SqlParameter nameParameter = new SqlParameter();
-    //   nameParameter.ParameterName = "@RestaurantName";
-    //   nameParameter.Value = this.GetName();
-    //   cmd.Parameters.Add(nameParameter);
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   while(rdr.Read())
-    //   {
-    //     this._id = rdr.GetInt32(0);
-    //   }
-    //   if(rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if(conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    // }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (name, price_range, happy_hour, cuisine_id) OUTPUT INSERTED.id VALUES(@RestaurantName, @RestaurantPriceRange, @RestaurantHappyHour, @RestaurantCuisineId);", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@RestaurantName";
+      nameParameter.Value = this.GetName();
+
+      SqlParameter priceRangeParameter = new SqlParameter();
+      priceRangeParameter.ParameterName = "@RestaurantPriceRange";
+      priceRangeParameter.Value = this.GetPriceRange();
+
+      SqlParameter happyHourParameter = new SqlParameter();
+      happyHourParameter.ParameterName = "@RestaurantHappyHour";
+      happyHourParameter.Value = this.GetHappyHour();
+
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@RestaurantCuisineId";
+      cuisineIdParameter.Value = this.GetCuisineId();
+
+      cmd.Parameters.Add(nameParameter);
+      cmd.Parameters.Add(priceRangeParameter);
+      cmd.Parameters.Add(happyHourParameter);
+      cmd.Parameters.Add(cuisineIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+    }
     // public void Update(string newName)
     // {
     //   SqlConnection conn = DB.Connection();
@@ -173,10 +189,9 @@ namespace BestRestaurants.Objects
         int restaurantId = rdr.GetInt32(0);
         string restaurantName = rdr.GetString(1);
         string restaurantPriceRange = rdr.GetString(2);
-        int restaurantCuisineId = rdr.GetInt32(3);
-        // bool restaurantHappyHour = rdr.GetSqlBoolean(4);
-        bool restaurantHappyHour = true;
-        Restaurant newRestaurant = new Restaurant(restaurantName, restaurantPriceRange, restaurantHappyHour, restaurantId, restaurantCuisineId);
+        bool restaurantHappyHour = rdr.GetBoolean(3);
+        int restaurantCuisineId = rdr.GetInt32(4);
+        Restaurant newRestaurant = new Restaurant(restaurantName, restaurantPriceRange, restaurantHappyHour, restaurantCuisineId, restaurantId);
         allRestaurants.Add(newRestaurant);
       }
 

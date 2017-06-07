@@ -41,26 +41,36 @@ namespace BestRestaurants
     public void Save_SavesRestaurantToDatabase()
     {
       //Arrange
-      Restaurant testCase = new Restaurant("Dar Al Salaam", "$$$", false);
+      Restaurant testCase = new Restaurant("Dar Al Salaam", "$$$", false, 0);
       //Act
       testCase.Save();
       List<Restaurant> actual = Restaurant.GetAll();
       List<Restaurant> expected = new List<Restaurant>{testCase};
+
+      // foreach(Restaurant ele in actual)
+      // {
+      //   Console.WriteLine("Act- Id: {0} Name: {1} priceRange: {2} happyHour: {3} cuisineId: {4}", ele.GetId(), ele.GetName(), ele.GetPriceRange(), ele.GetHappyHour(), ele.GetCuisineId());
+      // }
+      // foreach(Restaurant ele in expected)
+      // {
+      //   Console.WriteLine("Exp- Id: {0} Name: {1} priceRange: {2} happyHour: {3} cuisineId: {4}", ele.GetId(), ele.GetName(), ele.GetPriceRange(), ele.GetHappyHour(), ele.GetCuisineId());
+      // }
+
       //Assert
       Assert.Equal(expected, actual);
     }
-    // [Fact]
-    // public void Find_ReturnsRestaurantFromDatabase()
-    // {
-    //   //Arrange
-    //   Restaurant testCase = new Restaurant("Tex-Mex");
-    //   testCase.Save();
-    //   Restaurant expected = testCase;
-    //   //Act
-    //   Restaurant actual = Restaurant.Find(testCase.GetId());
-    //   //Assert
-    //   Assert.Equal(expected, actual);
-    // }
+    [Fact]
+    public void Find_ReturnsRestaurantFromDatabase()
+    {
+      //Arrange
+      Restaurant testCase = new Restaurant("Departures", "$$$$", true, 0);
+      testCase.Save();
+      Restaurant expected = testCase;
+      //Act
+      Restaurant actual = Restaurant.Find(testCase.GetId());
+      //Assert
+      Assert.Equal(expected, actual);
+    }
     // [Fact]
     // public void Delete_RemovesRestaurantFromDatabase()
     // {
