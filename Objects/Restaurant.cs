@@ -110,7 +110,7 @@ namespace BestRestaurants.Objects
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      
+
       SqlCommand cmd = new SqlCommand("", conn);
       if (columnName == "name") {
         cmd = new SqlCommand("UPDATE restaurants SET name = @NewString OUTPUT INSERTED.name WHERE id = @RestaurantId;", conn);
@@ -137,6 +137,44 @@ namespace BestRestaurants.Objects
         }
         if (columnName == "price_range") {
           this._priceRange = rdr.GetString(0);
+        }
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public void Update(string columnName, bool newBool)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("", conn);
+      if (columnName == "happy_hour") {
+        cmd = new SqlCommand("UPDATE restaurants SET happy_hour = @NewBool OUTPUT INSERTED.happy_hour WHERE id = @RestaurantId;", conn);
+      }
+
+      SqlParameter newNameParameter = new SqlParameter();
+      newNameParameter.ParameterName = "@NewBool";
+      newNameParameter.Value = newBool;
+      cmd.Parameters.Add(newNameParameter);
+
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(restaurantIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        if (columnName == "happy_hour") {
+          this._happyHour = rdr.GetBoolean(0);
         }
       }
 

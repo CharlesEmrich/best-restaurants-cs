@@ -100,17 +100,17 @@ namespace BestRestaurants
       Assert.Equal(newName, actual);
     }
     [Fact]
-    public void Update_UpdatesRestaurantIntFieldsInDatabase()
+    public void Update_UpdatesRestaurantBoolFieldsInDatabase()
     {
       //Arrange
       Restaurant testCase = new Restaurant("The Pie Hole", "$$", false);
       testCase.Save();
-      string newHappyHour = true;
+      bool newHappyHour = true;
       //Act
       testCase.Update("happy_hour", newHappyHour);
-      string actual = testCase.GetHappyHour();
+      bool actual = testCase.GetHappyHour();
       //Assert
-      Assert.Equal(newName, actual);
+      Assert.Equal(newHappyHour, actual);
     }
 
     // [Fact]
