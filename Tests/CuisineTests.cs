@@ -48,6 +48,18 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(expected, actual);
     }
+    [Fact]
+    public void Find_ReturnsCuisineFromDatabase()
+    {
+      //Arrange
+      Cuisine testCase = new Cuisine("Tex-Mex");
+      testCase.Save();
+      Cuisine expected = testCase;
+      //Act
+      Cuisine actual = Cuisine.Find(testCase.GetId());
+      //Assert
+      Assert.Equal(expected, actual);
+    }
 
     // [Fact]
     // public void GetAll_DatabaseStartsEmpty()
