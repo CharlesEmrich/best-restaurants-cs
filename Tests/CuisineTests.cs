@@ -1,4 +1,7 @@
 using Xunit;
+using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Collections.Generic;
 using BestRestaurants.Objects;
 
@@ -10,6 +13,10 @@ namespace BestRestaurants
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=best_restaurants_test;Integrated Security=SSPI;";
     }
+    public void Dispose()
+    {
+      Cuisine.DeleteAll();
+    }
 
     [Fact]
     public void GetAll_DatabaseStartsEmpty()
@@ -18,7 +25,7 @@ namespace BestRestaurants
       int actual = Cuisine.GetAll().Count;
       int expected = 0;
       //Assert
-      Asser.Equal(expect, actual);
+      Assert.Equal(expected, actual);
     }
 
     // [Fact]

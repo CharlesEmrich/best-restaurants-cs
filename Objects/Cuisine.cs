@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-
+using System.Data.SqlClient;
+using System;
 
 namespace BestRestaurants.Objects
 {
-  public class cuisine_id
+  public class Cuisine
   {
     private int _id;
     private string _name;
@@ -14,7 +15,7 @@ namespace BestRestaurants.Objects
       _name = name;
     }
 
-    public static GetAll()
+    public static List<Cuisine> GetAll()
     {
       List<Cuisine> allCuisines = new List<Cuisine>{};
 
@@ -42,6 +43,15 @@ namespace BestRestaurants.Objects
       }
 
       return allCuisines;
+    }
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM cuisines;", conn);
+      cmd.ExecuteNonQuery();
+      conn.Close();
     }
   }
 }
