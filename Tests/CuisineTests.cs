@@ -36,6 +36,18 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(testCase1, testCase2);
     }
+    [Fact]
+    public void Save_SavesCuisineToDatabase()
+    {
+      //Arrange
+      Cuisine testCase = new Cuisine("Middle Eastern");
+      //Act
+      testCase.Save();
+      List<Cuisine> actual = Cuisine.GetAll();
+      List<Cuisine> expected = new List<Cuisine>{testCase};
+      //Assert
+      Assert.Equal(expected, actual);
+    }
 
     // [Fact]
     // public void GetAll_DatabaseStartsEmpty()
