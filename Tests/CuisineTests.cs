@@ -73,6 +73,19 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(expected, actual);
     }
+    [Fact]
+    public void Update_UpdatesCuisineInDatabase()
+    {
+      //Arrange
+      Cuisine testCase = new Cuisine("New Amercant");
+      testCase.Save();
+      string newName = "New American";
+      //Act
+      testCase.Update(newName);
+      string actual = testCase.GetName();
+      //Assert
+      Assert.Equal(newName, actual);
+    }
 
     // [Fact]
     // public void GetAll_DatabaseStartsEmpty()
