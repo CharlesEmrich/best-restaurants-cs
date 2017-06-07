@@ -67,6 +67,40 @@ namespace BestRestaurants.Objects
         conn.Close();
       }
     }
+    public static Cuisine Find(int searchId)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM cuisines WHERE id = @CuisineId;", conn);
+      SqlParameter categoryIdParameter = new SqlParameter();
+      categoryIdParameter.ParameterName = "@CuisineId";
+      categoryIdParameter.Value = searchId.ToString();
+      cmd.Parameters.Add(categoryIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundId = 0;
+      string foundName = null;
+
+      while(rdr.Read())
+      {
+        foundId = rdr.GetInt32(0);
+        foundName = rdr.GetString(1);
+      }
+
+      Cuisine foundCuisine = new Cuisine(foundName, foundId);
+
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+
+      return foundCuisine;
+    }
     public static List<Cuisine> GetAll()
     {
       List<Cuisine> allCuisines = new List<Cuisine>{};
