@@ -210,20 +210,20 @@ namespace BestRestaurants.Objects
 
       return allRestaurants;
     }
-    // public static void Delete(int searchId)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("DELETE FROM restaurants WHERE id = @RestaurantId;", conn);
-    //   SqlParameter restaurantIdParameter = new SqlParameter();
-    //   restaurantIdParameter.ParameterName = "@RestaurantId";
-    //   restaurantIdParameter.Value = searchId.ToString();
-    //   cmd.Parameters.Add(restaurantIdParameter);
-    //
-    //   cmd.ExecuteNonQuery();
-    //   conn.Close();
-    // }
+    public static void Delete(int searchId)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM restaurants WHERE id = @RestaurantId;", conn);
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value = searchId.ToString();
+      cmd.Parameters.Add(restaurantIdParameter);
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
