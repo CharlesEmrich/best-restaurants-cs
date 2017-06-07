@@ -106,40 +106,50 @@ namespace BestRestaurants.Objects
         conn.Close();
       }
     }
-    // public void Update(string newName)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("UPDATE restaurants SET name = @NewName OUTPUT INSERTED.name WHERE id = @RestaurantId;", conn);
-    //
-    //   SqlParameter newNameParameter = new SqlParameter();
-    //   newNameParameter.ParameterName = "@NewName";
-    //   newNameParameter.Value = newName;
-    //   cmd.Parameters.Add(newNameParameter);
-    //
-    //
-    //   SqlParameter restaurantIdParameter = new SqlParameter();
-    //   restaurantIdParameter.ParameterName = "@RestaurantId";
-    //   restaurantIdParameter.Value = this.GetId();
-    //   cmd.Parameters.Add(restaurantIdParameter);
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   while(rdr.Read())
-    //   {
-    //     this._name = rdr.GetString(0);
-    //   }
-    //
-    //   if (rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    // }
+    public void Update(string columnName, string newString)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      
+      SqlCommand cmd = new SqlCommand("", conn);
+      if (columnName == "name") {
+        cmd = new SqlCommand("UPDATE restaurants SET name = @NewString OUTPUT INSERTED.name WHERE id = @RestaurantId;", conn);
+      }
+      if (columnName == "price_range") {
+        cmd = new SqlCommand("UPDATE restaurants SET price_range = @NewString OUTPUT INSERTED.price_range WHERE id = @RestaurantId;", conn);
+      }
+
+      SqlParameter newNameParameter = new SqlParameter();
+      newNameParameter.ParameterName = "@NewString";
+      newNameParameter.Value = newString;
+      cmd.Parameters.Add(newNameParameter);
+
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(restaurantIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        if (columnName == "name") {
+          this._name = rdr.GetString(0);
+        }
+        if (columnName == "price_range") {
+          this._priceRange = rdr.GetString(0);
+        }
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
     public static Restaurant Find(int searchId)
     {
       SqlConnection conn = DB.Connection();

@@ -94,7 +94,7 @@ namespace BestRestaurants
       testCase.Save();
       string newName = "The Pie Hole";
       //Act
-      // testCase.Update(newName);
+      testCase.Update("name", newName);
       string actual = testCase.GetName();
       //Assert
       Assert.Equal(newName, actual);
