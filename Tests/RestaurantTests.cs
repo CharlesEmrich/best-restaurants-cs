@@ -18,6 +18,7 @@ namespace BestRestaurants
       Restaurant.DeleteAll();
     }
 
+    // TODO: refactor to account for a constructor that can call Cuisine().
     [Fact]
     public void GetAll_DatabaseStartsEmpty()
     {
@@ -36,18 +37,18 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(testCase1, testCase2);
     }
-    // [Fact]
-    // public void Save_SavesRestaurantToDatabase()
-    // {
-    //   //Arrange
-    //   Restaurant testCase = new Restaurant("Middle Eastern");
-    //   //Act
-    //   testCase.Save();
-    //   List<Restaurant> actual = Restaurant.GetAll();
-    //   List<Restaurant> expected = new List<Restaurant>{testCase};
-    //   //Assert
-    //   Assert.Equal(expected, actual);
-    // }
+    [Fact]
+    public void Save_SavesRestaurantToDatabase()
+    {
+      //Arrange
+      Restaurant testCase = new Restaurant("Dar Al Salaam", "$$$", false);
+      //Act
+      testCase.Save();
+      List<Restaurant> actual = Restaurant.GetAll();
+      List<Restaurant> expected = new List<Restaurant>{testCase};
+      //Assert
+      Assert.Equal(expected, actual);
+    }
     // [Fact]
     // public void Find_ReturnsRestaurantFromDatabase()
     // {
