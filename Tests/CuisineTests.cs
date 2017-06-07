@@ -63,6 +63,7 @@ namespace BestRestaurants
     [Fact]
     public void Delete_RemovesCuisineFromDatabase()
     {
+      //TODO: Add a second saved Cuisine to make sure that we're not deleting the whole db.
       //Arrange
       Cuisine testCase = new Cuisine("Nouvelle French");
       testCase.Save();
