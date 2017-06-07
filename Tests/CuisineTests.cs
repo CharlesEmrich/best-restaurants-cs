@@ -60,6 +60,19 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(expected, actual);
     }
+    [Fact]
+    public void Delete_RemovesCuisineFromDatabase()
+    {
+      //Arrange
+      Cuisine testCase = new Cuisine("Nouvelle French");
+      testCase.Save();
+      //Act
+      Cuisine.Delete(testCase.GetId());
+      int actual = Cuisine.GetAll();
+      int expected = 0;
+      //Assert
+      Assert.Equal(expected, actual);
+    }
 
     // [Fact]
     // public void GetAll_DatabaseStartsEmpty()

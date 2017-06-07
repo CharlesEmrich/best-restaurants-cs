@@ -130,6 +130,10 @@ namespace BestRestaurants.Objects
 
       return allCuisines;
     }
+    public static Delete()
+    {
+
+    }
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
