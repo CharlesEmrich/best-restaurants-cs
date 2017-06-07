@@ -72,7 +72,7 @@ namespace BestRestaurants.Objects
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("UPDATE categories SET name = @NewName OUTPUT INSERTED.name WHERE id = @CuisineId;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE cuisines SET name = @NewName OUTPUT INSERTED.name WHERE id = @CuisineId;", conn);
 
       SqlParameter newNameParameter = new SqlParameter();
       newNameParameter.ParameterName = "@NewName";
