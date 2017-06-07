@@ -27,6 +27,15 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(expected, actual);
     }
+    [Fact]
+    public void Equals_ReturnsTrueForEquivalentObjects()
+    {
+      //Arrange / Act
+      Cuisine testCase1 = new Cuisine("Midwestern Fusion");
+      Cuisine testCase2 = new Cuisine("Midwestern Fusion");
+      //Assert
+      Assert.Equal(testCase1, testCase2);
+    }
 
     // [Fact]
     // public void GetAll_DatabaseStartsEmpty()
