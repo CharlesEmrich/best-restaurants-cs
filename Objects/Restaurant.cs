@@ -140,40 +140,44 @@ namespace BestRestaurants.Objects
     //     conn.Close();
     //   }
     // }
-    // public static Restaurant Find(int searchId)
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants WHERE id = @RestaurantId;", conn);
-    //   SqlParameter categoryIdParameter = new SqlParameter();
-    //   categoryIdParameter.ParameterName = "@RestaurantId";
-    //   categoryIdParameter.Value = searchId.ToString();
-    //   cmd.Parameters.Add(categoryIdParameter);
-    //   SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //   int foundId = 0;
-    //   string foundName = null;
-    //
-    //   while(rdr.Read())
-    //   {
-    //     foundId = rdr.GetInt32(0);
-    //     foundName = rdr.GetString(1);
-    //   }
-    //
-    //   Restaurant foundRestaurant = new Restaurant(foundName, foundId);
-    //
-    //   if(rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if(conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    //
-    //   return foundRestaurant;
-    // }
+    public static Restaurant Find(int searchId)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants WHERE id = @RestaurantId;", conn);
+      SqlParameter categoryIdParameter = new SqlParameter();
+      categoryIdParameter.ParameterName = "@RestaurantId";
+      categoryIdParameter.Value = searchId.ToString();
+      cmd.Parameters.Add(categoryIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundId = 0;
+      string foundName = null;
+      string foundPriceRange = null;
+      bool foundHappyHour = false;
+      int foundCuisineId = 0;
+      while(rdr.Read())
+      {
+        foundId = rdr.GetInt32(0);
+        foundName = rdr.GetString(1);
+        foundPriceRange = rdr.GetString(2);
+        foundHappyHour = rdr.GetBoolean(3);
+        foundCuisineId = rdr.GetInt32(4);
+      }
+      Restaurant foundRestaurant = new Restaurant(foundName, foundPriceRange, foundHappyHour, foundCuisineId, foundId);
+
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+
+      return foundRestaurant;
+    }
     public static List<Restaurant> GetAll()
     {
       List<Restaurant> allRestaurants = new List<Restaurant>{};
