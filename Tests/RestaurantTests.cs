@@ -71,19 +71,21 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(expected, actual);
     }
-    // [Fact]
-    // public void Delete_RemovesRestaurantFromDatabase()
-    // {
-    //   //Arrange
-    //   Restaurant testCase = new Restaurant("Nouvelle French");
-    //   testCase.Save();
-    //   //Act
-    //   Restaurant.Delete(testCase.GetId());
-    //   int actual = Restaurant.GetAll().Count;
-    //   int expected = 0;
-    //   //Assert
-    //   Assert.Equal(expected, actual);
-    // }
+    [Fact]
+    public void Delete_RemovesRestaurantFromDatabase()
+    {
+      //Arrange
+      Restaurant testCase1 = new Restaurant("Quimby's", "$", true);
+      testCase1.Save();
+      Restaurant testCase2 = new Restaurant("Shrimpy's", "$", true);
+      testCase2.Save();
+      //Act
+      Restaurant.Delete(testCase1.GetId());
+      int actual = Restaurant.GetAll().Count;
+      int expected = 1;
+      //Assert
+      Assert.Equal(expected, actual);
+    }
     // [Fact]
     // public void Update_UpdatesRestaurantInDatabase()
     // {
