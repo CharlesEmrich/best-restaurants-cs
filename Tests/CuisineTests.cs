@@ -68,7 +68,7 @@ namespace BestRestaurants
       testCase.Save();
       //Act
       Cuisine.Delete(testCase.GetId());
-      int actual = Cuisine.GetAll();
+      int actual = Cuisine.GetAll().Count;
       int expected = 0;
       //Assert
       Assert.Equal(expected, actual);

@@ -130,9 +130,19 @@ namespace BestRestaurants.Objects
 
       return allCuisines;
     }
-    public static Delete()
+    public static void Delete(int searchId)
     {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
 
+      SqlCommand cmd = new SqlCommand("DELETE FROM cuisines WHERE id = @CuisineId;", conn);
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@CuisineId";
+      cuisineIdParameter.Value = searchId.ToString();
+      cmd.Parameters.Add(cuisineIdParameter);
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
     }
     public static void DeleteAll()
     {
