@@ -86,19 +86,19 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(expected, actual);
     }
-    // [Fact]
-    // public void Update_UpdatesRestaurantInDatabase()
-    // {
-    //   //Arrange
-    //   Restaurant testCase = new Restaurant("New Amercant");
-    //   testCase.Save();
-    //   string newName = "New American";
-    //   //Act
-    //   testCase.Update(newName);
-    //   string actual = testCase.GetName();
-    //   //Assert
-    //   Assert.Equal(newName, actual);
-    // }
+    [Fact]
+    public void Update_UpdatesRestaurantInDatabase()
+    {
+      //Arrange
+      Restaurant testCase = new Restaurant("He Pie Whole", "$$", false);
+      testCase.Save();
+      string newName = "The Pie Hole";
+      //Act
+      // testCase.Update(newName);
+      string actual = testCase.GetName();
+      //Assert
+      Assert.Equal(newName, actual);
+    }
 
     // [Fact]
     // public void GetAll_DatabaseStartsEmpty()
