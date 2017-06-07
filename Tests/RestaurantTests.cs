@@ -87,7 +87,7 @@ namespace BestRestaurants
       Assert.Equal(expected, actual);
     }
     [Fact]
-    public void Update_UpdatesRestaurantInDatabase()
+    public void Update_UpdatesRestaurantStringFieldsInDatabase()
     {
       //Arrange
       Restaurant testCase = new Restaurant("He Pie Whole", "$$", false);
@@ -96,6 +96,19 @@ namespace BestRestaurants
       //Act
       testCase.Update("name", newName);
       string actual = testCase.GetName();
+      //Assert
+      Assert.Equal(newName, actual);
+    }
+    [Fact]
+    public void Update_UpdatesRestaurantIntFieldsInDatabase()
+    {
+      //Arrange
+      Restaurant testCase = new Restaurant("The Pie Hole", "$$", false);
+      testCase.Save();
+      string newHappyHour = true;
+      //Act
+      testCase.Update("happy_hour", newHappyHour);
+      string actual = testCase.GetHappyHour();
       //Assert
       Assert.Equal(newName, actual);
     }
